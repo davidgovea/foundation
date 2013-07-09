@@ -2,10 +2,14 @@
 // Global Foundation Mixins
 //
 
+$experimental ?= true;
+
 // We use this to control border radius.
 radius($radius=$global-radius) {
-  if $radius {
-    -webkit-border-radius: $radius;
+  if $radius is a 'unit' {
+    if $experimental {
+      -webkit-border-radius: $radius;
+    }
     border-radius: $radius;
   }
 }
@@ -13,31 +17,39 @@ radius($radius=$global-radius) {
 // We use this to create equal side border radius on elements.
 side-radius($side, $radius) {
   if $side == left {
-    -moz-border-radius-bottomleft: $radius;
-    -moz-border-radius-topleft: $radius;
-    -webkit-border-bottom-left-radius: $radius;
-    -webkit-border-top-left-radius: $radius;
+    if $experimental {
+      -moz-border-radius-bottomleft: $radius;
+      -moz-border-radius-topleft: $radius;
+      -webkit-border-bottom-left-radius: $radius;
+      -webkit-border-top-left-radius: $radius;
+    }
     border-bottom-left-radius: $radius;
     border-top-left-radius: $radius;
   } else if $side == right {
-    -moz-border-radius-topright: $radius;
-    -moz-border-radius-bottomright: $radius;
-    -webkit-border-top-right-radius: $radius;
-    -webkit-border-bottom-right-radius: $radius;
+    if $experimental {
+      -moz-border-radius-topright: $radius;
+      -moz-border-radius-bottomright: $radius;
+      -webkit-border-top-right-radius: $radius;
+      -webkit-border-bottom-right-radius: $radius;
+    }
     border-top-right-radius: $radius;
     border-bottom-right-radius: $radius;
   } else if $side == top {
-    -moz-border-radius-topright: $radius;
-    -moz-border-radius-topleft: $radius;
-    -webkit-border-top-right-radius: $radius;
-    -webkit-border-top-left-radius: $radius;
+    if $experimental {
+      -moz-border-radius-topright: $radius;
+      -moz-border-radius-topleft: $radius;
+      -webkit-border-top-right-radius: $radius;
+      -webkit-border-top-left-radius: $radius;
+    }
     border-top-right-radius: $radius;
     border-top-left-radius: $radius;
   } else if $side == bottom {
-    -moz-border-radius-bottomright: $radius;
-    -moz-border-radius-bottomleft: $radius;
-    -webkit-border-bottom-right-radius: $radius;
-    -webkit-border-bottom-left-radius: $radius;
+    if $experimental {
+      -moz-border-radius-bottomright: $radius;
+      -moz-border-radius-bottomleft: $radius;
+      -webkit-border-bottom-right-radius: $radius;
+      -webkit-border-bottom-left-radius: $radius;
+    }
     border-bottom-right-radius: $radius;
     border-bottom-left-radius: $radius;
   }
@@ -45,28 +57,33 @@ side-radius($side, $radius) {
 
 // We can control whether or not we have inset shadows edges.
 inset-shadow($active=true) {
-  -webkit-box-shadow: $shiny-edge-size $shiny-edge-color inset;
+  if $experimental {
+    -webkit-box-shadow: $shiny-edge-size $shiny-edge-color inset;
+  }
   box-shadow: $shiny-edge-size $shiny-edge-color inset;
 
-  if $active {
-    &:active {
+  if $active { &:active {
+    if $experimental {
       -webkit-box-shadow: $shiny-edge-size $shiny-edge-active-color inset;
-      box-shadow: $shiny-edge-size $shiny-edge-active-color inset;
     }
-  }
+    box-shadow: $shiny-edge-size $shiny-edge-active-color inset; } }
 }
 
 // We use this to add transitions to elements
 single-transition($property=all, $speed=300ms, $ease=ease-out) {
-  -webkit-transition: $property $speed $ease;
-  -moz-transition: $property $speed $ease;
+  if $experimental {
+    -webkit-transition: $property $speed $ease;
+    -moz-transition: $property $speed $ease;
+  }
   transition: $property $speed $ease;
 }
 
 // We use this to add box-sizing across browser prefixes
 box-sizing($type=border-box) {
-  -moz-box-sizing: $type;
-  -webkit-box-sizing: $type;
+  if $experimental {
+    -moz-box-sizing: $type;
+    -webkit-box-sizing: $type;
+  }
   box-sizing: $type;
 }
 
@@ -83,45 +100,43 @@ css-triangle($triangle-size, $triangle-color, $triangle-direction) {
   }
   if ($triangle-direction == bottom) {
     border-color: transparent transparent $triangle-color transparent;
-    border-top-style: solid;
+    border-bottom-style: solid;
   }
   if ($triangle-direction == left) {
     border-color: transparent transparent transparent $triangle-color;
-    border-top-style: solid;
+    border-left-style: solid;
   }
   if ($triangle-direction == right) {
     border-color: transparent $triangle-color transparent transparent;
-    border-top-style: solid;
+    border-right-style: solid;
   }
 }
 
 // We use this to do clear floats
 clearfix() {
   *zoom:1;
-  &:before, &:after {
-    content: " ";
-    display: table;
-  }
-  &:after {
-    clear: both;
-  }
+  &:before, &:after { content: " "; display: table; }
+  &:after { clear: both; }
 }
 
 
 // We use this to add a glowing effect to block elements
-block-glowing-effect($selector = focus, $fade-time = 300ms, $glowing-effect-color = fade-out($primary-color, .25)) {
-  -webkit-transition: -webkit-box-shadow $fade-time, border-color $fade-time ease-in-out;
-  -moz-transition: -moz-box-shadow $fade-time, border-color $fade-time ease-in-out;
+block-glowing-effect($selector=focus, $fade-time=300ms, $glowing-effect-color=fade-out($primary-color, .25)) {
+  if $experimental {
+    -webkit-transition: -webkit-box-shadow $fade-time, border-color $fade-time ease-in-out;
+    -moz-transition: -moz-box-shadow $fade-time, border-color $fade-time ease-in-out;
+  }
   transition: box-shadow $fade-time, border-color $fade-time ease-in-out;
 
   &:{$selector} {
-    -webkit-box-shadow: 0 0 5px $glowing-effect-color;
-    -moz-box-shadow: 0 0 5px $glowing-effect-color;
+    if $experimental {
+      -webkit-box-shadow: 0 0 5px $glowing-effect-color;
+      -moz-box-shadow: 0 0 5px $glowing-effect-color;
+    }
     box-shadow: 0 0 5px $glowing-effect-color;
     border-color: $glowing-effect-color;
   }
 }
-
 
 //
 // Foundation Variables
@@ -147,8 +162,8 @@ emCalc($pxWidth) {
 }
 
 // Maybe you want to create rems and pixels
-// remCalc($pxWidth) {
-//   return ($pxWidth / $em-base) * 1rem;
+// @function remCalc($pxWidth) {
+//   @return $pxWidth / $em-base * 1rem;
 // }
 
 // We use these to control various global styles
@@ -196,19 +211,27 @@ $include-print-styles ?= true;
 $include-html-global-classes ?= $include-html-classes;
 
 // Media Queries
-$small-screen ?= emCalc(768px);
-$medium-screen ?= emCalc(1280px);
-$large-screen ?= emCalc(1440px);
+$small-screen ?= 768px;
+$medium-screen ?= 1280px;
+$large-screen ?= 1440px;
 
 $screen ?= "only screen";
-$small ?= "only screen and (min-width:" + $small-screen + ")";
-$medium ?= "only screen and (min-width:" + $medium-screen + ")";
-$large ?= "only screen and (min-width:" + $large-screen + ")";
-$landscape ?= "only screen and (orientation:landscape)";
-$portrait ?= "only screen and (orientation:portrait)";
+$small ?= "only screen and (min-width: " + $small-screen + ")";
+$medium ?= "only screen and (min-width: " + $medium-screen + ")";
+$large ?= "only screen and (min-width: " + $large-screen + ")";
+$landscape ?= "only screen and (orientation: landscape)";
+$portrait ?= "only screen and (orientation: portrait)";
+
+//We use this as cursors values for enabling the option of having custom cursors in the whole site's stylesheet
+$cursor-crosshair-value ?= crosshair;
+$cursor-default-value ?= default;
+$cursor-pointer-value ?= pointer;
+$cursor-help-value ?= help;
+$cursor-text-value ?= text;
+
 
 if $include-html-global-classes {
-  
+
   // Set box-sizing globally to handle padding and border widths
   *,
   *:before,
@@ -230,7 +253,10 @@ if $include-html-global-classes {
     font-style: $body-font-style;
     line-height: 1; // Set to $base-line-height to take on browser default of 150%
     position: relative;
+    cursor: $cursor-default-value;
   }
+
+a:hover { cursor: $cursor-pointer-value; }
 
   // Override outline from normalize, we don't like it
   a:focus { outline: none; }
@@ -282,4 +308,5 @@ if $include-html-global-classes {
 
   // Make select elements 100% width by default
   select { width: 100%; }
+
 }

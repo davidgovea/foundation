@@ -4,7 +4,7 @@
   Foundation.libs.forms = {
     name: 'forms',
 
-    version: '4.1.6',
+    version: '4.2.1',
 
     cache: {},
 
@@ -33,10 +33,6 @@
     },
 
     assemble: function () {
-      $('form.custom input[type="radio"]', $(this.scope)).not('[data-customforms="disabled"]')
-        .each(this.append_custom_markup);
-      $('form.custom input[type="checkbox"]', $(this.scope)).not('[data-customforms="disabled"]')
-        .each(this.append_custom_markup);
       $('form.custom select', $(this.scope))
         .not('[data-customforms="disabled"]')
         .not('[multiple=multiple]')
@@ -47,45 +43,8 @@
       var self = this;
 
       $(this.scope)
-        .on('click.fndtn.forms', 'form.custom span.custom.checkbox', function (e) {
-          e.preventDefault();
-          e.stopPropagation();
-          self.toggle_checkbox($(this));
-        })
-        .on('click.fndtn.forms', 'form.custom span.custom.radio', function (e) {
-          e.preventDefault();
-          e.stopPropagation();
-          self.toggle_radio($(this));
-        })
         .on('change.fndtn.forms', 'form.custom select:not([data-customforms="disabled"])', function (e, force_refresh) {
           self.refresh_custom_select($(this), force_refresh);
-        })
-        .on('click.fndtn.forms', 'form.custom label', function (e) {
-          if ($(e.target).is('label')) {
-            var $associatedElement = $('#' + self.escape($(this).attr('for')) + ':not([data-customforms="disabled"])'),
-              $customCheckbox,
-              $customRadio;
-
-            if ($associatedElement.length !== 0) {
-              if ($associatedElement.attr('type') === 'checkbox') {
-                e.preventDefault();
-                $customCheckbox = $(this).find('span.custom.checkbox');
-                //the checkbox might be outside after the label or inside of another element
-                if ($customCheckbox.length == 0) {
-                  $customCheckbox = $associatedElement.add(this).siblings('span.custom.checkbox').first();
-                }
-                self.toggle_checkbox($customCheckbox);
-              } else if ($associatedElement.attr('type') === 'radio') {
-                e.preventDefault();
-                $customRadio = $(this).find('span.custom.radio');
-                //the radio might be outside after the label or inside of another element
-                if ($customRadio.length == 0) {
-                  $customRadio = $associatedElement.add(this).siblings('span.custom.radio').first();
-                }
-                self.toggle_radio($customRadio);
-              }
-            }
-          }
         })
         .on('click.fndtn.forms', 'form.custom div.custom.dropdown a.current, form.custom div.custom.dropdown a.selector', function (e) {
           var $this = $(this),
@@ -156,7 +115,7 @@
           if (e.which === 13) {
             dropdown.find('li.selected').trigger('click');
           }
-          
+
           if (e.which === 27) {
             dropdown.removeClass('open');
           }
@@ -196,14 +155,14 @@
       this.settings.init = true;
     },
 
-    go_to: function (dropdown, char) {
+    go_to: function (dropdown, character) {
       var lis = dropdown.find('li'),
           count = lis.length;
 
       if (count > 0) {
         for (var i = 0; i < count; i++) {
           var first_letter = lis.eq(i).text().charAt(0).toLowerCase();
-          if (first_letter === String.fromCharCode(char).toLowerCase()) return lis.eq(i);
+          if (first_letter === String.fromCharCode(character).toLowerCase()) return lis.eq(i);
         }
       }
     },
@@ -221,23 +180,6 @@
           this.scrollTo(el, duration - 10);
         }
       }.bind(this), 10);
-    },
-
-    append_custom_markup: function (idx, sel) {
-      var $this = $(sel),
-          type = $this.attr('type'),
-          $span = $this.next('span.custom.' + type);
-
-      if (!$this.parent().hasClass('switch')) {
-        $this.addClass('hidden-field');
-      }
-
-      if ($span.length === 0) {
-        $span = $('<span class="custom ' + type + '"></span>').insertAfter($this);
-      }
-
-      $span.toggleClass('checked', $this.is(':checked'));
-      $span.toggleClass('disabled', $this.is(':disabled'));
     },
 
     append_custom_select: function (idx, sel) {
@@ -269,7 +211,8 @@
           $customList = $customSelect.find("ul");
 
           liHtml = $options.map(function () {
-            return "<li>" + $(this).html() + "</li>";
+            var copyClasses = $(this).attr('class') ? $(this).attr('class') : '';
+            return "<li class='" + copyClasses + "'>" + $(this).html() + "</li>";
           }).get().join('');
 
           $customList.append(liHtml);
@@ -391,37 +334,6 @@
       }
     },
 
-    toggle_checkbox: function ($element) {
-      var $input = $element.prev(),
-          input = $input[0];
-
-      if (false === $input.is(':disabled')) {
-        input.checked = ((input.checked) ? false : true);
-        $element.toggleClass('checked');
-
-        $input.trigger('change');
-      }
-    },
-
-    toggle_radio: function ($element) {
-        var $input = $element.prev(),
-            $form = $input.closest('form.custom'),
-            input = $input[0];
-
-        if (false === $input.is(':disabled')) {
-          $form.find('input[type="radio"][name="' + this.escape($input.attr('name')) + '"]')
-            .next().not($element).removeClass('checked');
-
-          if (!$element.hasClass('checked')) {
-            $element.toggleClass('checked');
-          }
-
-          input.checked = $element.hasClass('checked');
-
-          $input.trigger('change');
-        }
-    },
-
     escape: function (text) {
       return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
     },
@@ -445,7 +357,8 @@
           var _self = this;
 
           // Set all hidden parent elements, including this element.
-          _self.hidden = $child.parents().andSelf().filter(":hidden");
+          _self.hidden = $child.parents();
+          _self.hidden = _self.hidden.add($child).filter(":hidden");
 
           // Loop through all hidden elements.
           _self.hidden.each(function () {
@@ -499,7 +412,9 @@
 
     off: function () {
       $(this.scope).off('.fndtn.forms');
-    }
+    },
+
+    reflow : function () {}
   };
 
   var getFirstPrevSibling = function($el, selector) {

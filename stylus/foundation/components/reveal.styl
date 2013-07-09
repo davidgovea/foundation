@@ -1,4 +1,3 @@
-// NEED TO FINISH THE LOGIC HERE
 $include-html-reveal-classes ?= $include-html-classes;
 
 //
@@ -27,6 +26,9 @@ $reveal-close-weight ?= bold;
 $reveal-border-style ?= solid;
 $reveal-border-width ?= 1px;
 $reveal-border-color ?= #666;
+
+$reveal-modal-class ?= "reveal-modal";
+$close-reveal-modal-class ?= "close-reveal-modal";
 
 //
 // Reveal Mixins
@@ -81,7 +83,9 @@ reveal-modal-style($bg=$reveal-modal-bg, $padding=$reveal-modal-padding, $border
 
   // We can choose whether or not to include the default box-shadow.
   if $box-shadow {
-    -webkit-box-shadow: $reveal-box-shadow;
+    if $experimental {
+      -webkit-box-shadow: $reveal-box-shadow;
+    }
     box-shadow: $reveal-box-shadow;
   }
 
@@ -97,7 +101,7 @@ reveal-close($color=$reveal-close-color) {
   {$opposite-direction}: $reveal-close-side;
   color: $color;
   font-weight: $reveal-close-weight;
-  cursor: pointer;
+  cursor: $cursor-pointer-value;
 }
 
 if $include-html-reveal-classes != false {
@@ -106,11 +110,11 @@ if $include-html-reveal-classes != false {
   	reveal-bg(); 
   }
 
-  .reveal-modal {
+  .{$reveal-modal-class} {
     reveal-modal-base();
     reveal-modal-style();
 
-    .close-reveal-modal {
+    .{$close-reveal-modal-class} {
     	reveal-close(); 
     }
   }
@@ -118,7 +122,7 @@ if $include-html-reveal-classes != false {
   // Large Screen Styles
   @media $small {
 
-    .reveal-modal {
+    .{$reveal-modal-class} {
       reveal-modal-style(false, emCalc(30px), false, $box-shadow: false, $top-offset: emCalc(100px));
 
       &.tiny  {
@@ -141,6 +145,6 @@ if $include-html-reveal-classes != false {
 
   // Reveal Print Styles
   @media print {
-    .reveal-modal {background: #fff !important;}
+    .{$reveal-modal-class} {background: #fff !important;}
   }
 }

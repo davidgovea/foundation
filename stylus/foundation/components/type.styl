@@ -24,7 +24,7 @@ $h6-font-size ?= 1em;
 // These control how subheaders are styled.
 $subheader-line-height ?= 1.4;
 $subheader-font-color ?= lighten($header-font-color, 30%);
-$subheader-font-weight ?= 300;
+$subheader-font-weight ?=300;
 $subheader-top-margin ?= .2em;
 $subheader-bottom-margin ?= .5em;
 
@@ -33,7 +33,7 @@ $small-font-size ?= 60%;
 $small-font-color ?= lighten($header-font-color, 30%);
 
 // We use these to style paragraphs
-$paragraph-font-family ?= inherit;
+$paragraph-font-family ?=inherit;
 $paragraph-font-weight ?= normal;
 $paragraph-font-size ?= 1em;
 $paragraph-line-height ?= 1.6;
@@ -62,24 +62,25 @@ $hr-margin ?= emCalc(20px);
 // We use these to style lists
 $list-style-position ?= outside;
 $list-side-margin ?= emCalc(20px);
+$list-nested-margin ?= emCalc(20px);
 $definition-list-header-weight ?= bold;
 $definition-list-header-margin-bottom ?= .3em;
 $definition-list-margin-bottom ?= emCalc(12px);
 
 // We use these to style blockquotes
-$blockquote-font-color ?= lighten($header-font-color, 30%);
+$blockquote-font-color ?=lighten($header-font-color, 30%);
 $blockquote-padding ?= emCalc(9px) emCalc(20px) 0 emCalc(19px);
-$blockquote-border ?= 1px solid #ddd;
-$blockquote-cite-font-size ?= emCalc(13px);
+$blockquote-border ?=1px solid #ddd;
+$blockquote-cite-font-size ?=emCalc(13px);
 $blockquote-cite-font-color ?= lighten($header-font-color, 20%);
 $blockquote-cite-link-color ?= $blockquote-cite-font-color;
 
 // Acronym styles
-$acronym-underline ?= 1px dotted #ddd;
+$acronym-underline ?=1px dotted #ddd;
 
 // We use these to control padding and margin
-$microformat-padding ?= emCalc(10px) emCalc(12px);
-$microformat-margin ?= 0 0 emCalc(20px) 0;
+$microformat-padding ?=emCalc(10px) emCalc(12px);
+$microformat-margin ?=0 0 emCalc(20px) 0;
 
 // We use these to control the border styles
 $microformat-border-width ?= 1px;
@@ -91,7 +92,7 @@ $microformat-fullname-font-weight ?= bold;
 $microformat-fullname-font-size ?= emCalc(15px);
 
 // We use this to control the summary font styles
-$microformat-summary-font-weight ?= bold;
+$microformat-summary-font-weight ?=bold;
 
 // We use this to control abbr padding
 $microformat-abbr-padding ?= 0 emCalc(1px);
@@ -104,12 +105,14 @@ $microformat-abbr-font-decoration ?= none;
 //
 // Typography Placeholders
 //
-$lead() {
+
+// These will throw a deprecation warning if used within a media query.
+lead() {
   font-size: $paragraph-font-size + emCalc(3.5px);
   line-height: 1.6;
 }
 
-$subheader() {
+subheader() {
   line-height: $subheader-line-height;
   color: $subheader-font-color;
   font-weight: $subheader-font-weight;
@@ -166,7 +169,7 @@ if $include-html-type-classes != false {
     text-rendering: $paragraph-text-rendering;
 
     &.lead {
-      $lead();
+      lead();
     }
 
     & aside {
@@ -202,7 +205,7 @@ if $include-html-type-classes != false {
   h6 { font-size: $h6-font-size; }
 
   .subheader {
-    $subheader();
+    subheader();
   }
 
   hr {
@@ -248,12 +251,16 @@ if $include-html-type-classes != false {
     font-family: $paragraph-font-family;
   }
 
+  ul, ol {
+    margin-{$default-float}: $list-side-margin;
+  }
+
   /* Unordered Lists */
   ul {
     li {
       ul,
       ol {
-        margin-{$default-float}: $list-side-margin;
+        margin-{$default-float}: $list-nested-margin;
         margin-bottom: 0;
         font-size: 1em; /* Override nested font-size change */
       }
@@ -275,7 +282,7 @@ if $include-html-type-classes != false {
     li {
       ul,
       ol {
-        margin-{$default-float}: $list-side-margin;
+        margin-{$default-float}: $list-nested-margin;
         margin-bottom: 0;
       }
     }
@@ -297,7 +304,7 @@ if $include-html-type-classes != false {
     font-size: 90%;
     color: $body-font-color;
     border-bottom: $acronym-underline;
-    cursor: help;
+    cursor: $cursor-help-value;
   }
   abbr {
     text-transform: none;
@@ -350,7 +357,7 @@ if $include-html-type-classes != false {
     .summary { font-weight: $microformat-summary-font-weight; }
 
     abbr {
-      cursor: default;
+      cursor: $cursor-default-value;
       text-decoration: $microformat-abbr-font-decoration;
       font-weight: $microformat-abbr-font-weight;
       border: none;

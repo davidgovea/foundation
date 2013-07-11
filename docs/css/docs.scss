@@ -7,7 +7,9 @@
 /* Coderay styles */
 .html, .css, .scss, .js { position: relative; }
 
-ul, ol, dl { list-style-position: inside; }
+.CodeRay {
+  ul, ol, dl { list-style-position: inside; }
+}
 
 .CodeRay:before {
   position: absolute;
@@ -174,6 +176,8 @@ input[type="text"].attached-input {
     color: #555;
   }
 }
+
+header { background-color: #2ba6cb; padding: 15px 0; margin-bottom: 25px; }
 
 /* Section Docs */
 .section-auto-sample {

@@ -135,7 +135,16 @@
         }
 
         if (typeof ajax_settings === 'undefined' || !ajax_settings.url) {
-          this.hide(open_modal, this.settings.css.close);
+          // Apply stacked attribute to open stackable modals
+          var toStack = open_modal.filter('[data-stackable]').not('[data-stacked]');
+          toStack.each(function(index, el) {
+            var $el = $(el);
+            modal.one('closed', function(){
+              $el.removeAttr('data-stacked');
+            });
+            $el.attr('data-stacked', true);
+          });
+          this.hide(open_modal.not('[data-stacked]'), this.settings.css.close);
           this.show(modal, this.settings.css.open);
         } else {
           var self = this,
@@ -169,7 +178,8 @@
         this.locked = true;
         modal.trigger('close');
         this.toggle_bg(modal);
-        this.hide(open_modals, this.settings.css.close);
+        // Hide any non-stacked open modals
+        this.hide(open_modals.not('[data-stacked]'), this.settings.css.close);
       }
     },
 
@@ -190,7 +200,10 @@
       }
 
       if (this.settings.bg.filter(':visible').length > 0) {
-        this.hide(this.settings.bg);
+        // Check for stacked modals before hiding bg
+        if ($('.reveal-modal[data-stacked]').length === 0) {
+          this.hide(this.settings.bg);
+        }
       } else {
         this.show(this.settings.bg);
       }

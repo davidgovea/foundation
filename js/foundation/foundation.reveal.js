@@ -136,15 +136,18 @@
 
         if (typeof ajax_settings === 'undefined' || !ajax_settings.url) {
           // Apply stacked attribute to open stackable modals
-          var toStack = open_modal.filter('[data-stackable]').not('[data-stacked]');
           toStack.each(function(index, el) {
             var $el = $(el);
+          var stack_modals = open_modal.filter('[data-reveal-stack]'),
+            new_stacks = stack_modals.not('[data-reveal-stacked]'),
+            z_list, z_max;
             modal.one('closed', function(){
-              $el.removeAttr('data-stacked');
+              $el.removeAttr('data-reveal-stacked');
             });
-            $el.attr('data-stacked', true);
+            
+            $el.attr('data-reveal-stacked', true);
           });
-          this.hide(open_modal.not('[data-stacked]'), this.settings.css.close);
+          this.hide(open_modal.not('[data-reveal-stacked]'), this.settings.css.close);
           this.show(modal, this.settings.css.open);
         } else {
           var self = this,
@@ -179,7 +182,7 @@
         modal.trigger('close');
         this.toggle_bg(modal);
         // Hide any non-stacked open modals
-        this.hide(open_modals.not('[data-stacked]'), this.settings.css.close);
+        this.hide(open_modals.not('[data-reveal-stacked]'), this.settings.css.close);
       }
     },
 
@@ -201,7 +204,7 @@
 
       if (this.settings.bg.filter(':visible').length > 0) {
         // Check for stacked modals before hiding bg
-        if ($('.reveal-modal[data-stacked]').length === 0) {
+        if ($('.reveal-modal[data-reveal-stacked]').length === 0) {
           this.hide(this.settings.bg);
         }
       } else {

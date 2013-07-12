@@ -89,7 +89,7 @@ switch-base($transition-speed=$switch-paddle-transition-speed, $transition-ease=
   }
 
   // The toggle area for radio switches. We call is a paddle.
-  & > span {
+  span:last-child {
     position: absolute;
     top: -1px;
     {$default-float}: -1px;
@@ -145,6 +145,12 @@ switch-base($transition-speed=$switch-paddle-transition-speed, $transition-ease=
     -webkit-animation: webkitSiblingBugfix infinite 1s;
   }
 
+  form.custom & .hidden-field {
+    margin-left: auto;
+    position: absolute;
+    visibility: visible;
+  }
+
 }
 
 // We use this mixin to create the size styles for switches.
@@ -160,13 +166,13 @@ switch-size($height=$switch-height-med, $font-size=$switch-font-size-med, $line-
 
   input {
     // Move the paddle to the right position
-    &:first-of-type:checked ~ span {
+    &:first-of-type:checked ~ span:last-child {
       {$default-float}: 100%;
       margin-{$default-float}: emCalc(-($height) + 1px);
     }
   }
 
-  & > span {
+  span:last-child {
     width: emCalc($height);
     height: emCalc($height);
   }
@@ -180,7 +186,7 @@ switch-style($paddle-bg=$switch-paddle-bg, $positive-color=$switch-positive-colo
     background: $switch-bg;
     border-color: $switch-border-color;
 
-    & > span {
+    span:last-child {
       border-color: darken($paddle-bg, 30%);
       background: $paddle-bg;
       if $experimental {
@@ -198,7 +204,7 @@ switch-style($paddle-bg=$switch-paddle-bg, $positive-color=$switch-positive-colo
 
     &:hover,
     &:focus {
-      & > span {
+      span:last-child {
         background: $paddle-bg;
         if $experimental {
           background: -moz-linear-gradient(top, $paddle-bg 0%, darken($paddle-bg, 10%) 100%);
@@ -214,12 +220,12 @@ switch-style($paddle-bg=$switch-paddle-bg, $positive-color=$switch-positive-colo
   // Setting up the radius for switches
   if $radius == true {
     radius(4px);
-    & > span {
+    span:last-child {
     	radius(3px); 
     }
   } else if $radius {
     radius($radius);
-    & > span {
+    span:last-child {
     	radius($radius - 1px); 
     }
   }
@@ -260,7 +266,7 @@ if $include-html-button-classes != false {
       // Add a radius to the switch
       &.radius {
         radius(4px);
-        & > span {
+        span:last-child {
         	radius(3px); 
         }
       }
@@ -268,7 +274,7 @@ if $include-html-button-classes != false {
       // Make the switch completely round, like a pill
       &.round {
         radius(1000px);
-        & > span {
+        span:last-child {
         	radius(999px); 
         }
         label { padding: 0 emCalc($switch-label-side-padding + 3px); }

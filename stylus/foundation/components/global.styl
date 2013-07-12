@@ -158,12 +158,12 @@ $em-base ?= 16;
 
 // It strips the unit of measure and returns it
 strip-unit($num) {
-  return $num / ($num * 0 + 1);
+  return unit($num, '')
 }
 
 // Converts "px" to "em" using the ($)em-base
 convert-to-em($value) {
-  $value: strip-unit($value) / strip-unit($em-base) * 1em;
+  $value = strip-unit($value) / strip-unit($em-base) * 1em;
   if ($value == 0em) { $value: 0; } // Turn 0em into 0
   return $value;
 }
@@ -171,16 +171,11 @@ convert-to-em($value) {
 // Just enter the number, no need to mention "px"
 emCalc() {
   $max = length(arguments); // Get the total number of parameters passed
-
-  // // If there is only 1 parameter, then return it as an integer.
-  // // This is done because a list can't be multiplied or divided even if it contains a single value
-  // if $max == 1 { @return convert-to-em(arguments[0]); }
-
-  // $emValues: (); // This will eventually store the converted $values in a list
-  for num in (1..length(arguments))
-    arguments[num-1] = convert-to-em(arguments[num-1])
-    
-  return arguments
+  $emValues = (); // This will eventually store the converted $values in a list
+  for arg in arguments {
+    push($emValues, convert-to-em(arg))
+  }
+  return $emValues
 }
 
 // Maybe you want to create rems and pixels

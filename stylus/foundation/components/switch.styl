@@ -159,7 +159,7 @@ switch-size($height=$switch-height-med, $font-size=$switch-font-size-med, $line-
   height: $height;
 
   label {
-    padding: 0 emCalc($switch-label-side-padding);
+    padding: emCalc(0, $switch-label-side-padding);
     line-height: $line-height;
     font-size: emCalc($font-size);
   }
@@ -277,7 +277,7 @@ if $include-html-button-classes != false {
         span:last-child {
         	radius(999px); 
         }
-        label { padding: 0 emCalc($switch-label-side-padding + 3px); }
+        label { padding: emCalc(0, $switch-label-side-padding + 3); }
       }
 
     }

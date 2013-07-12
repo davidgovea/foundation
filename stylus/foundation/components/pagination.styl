@@ -15,7 +15,7 @@ $pagination-li-font-size ?= emCalc(14px);
 $pagination-li-margin ?= emCalc(5px);
 
 // We use these for the pagination anchor links
-$pagination-link-pad ?= emCalc(1px) emCalc(7px) emCalc(1px);
+$pagination-link-pad ?= emCalc(1, 7, 1);
 $pagination-link-font-color ?= #999;
 $pagination-link-active-bg ?= darken(#fff, 10%);
 
@@ -64,6 +64,8 @@ pagination-current-item($has-anchor=true) {
       &:focus { background: $pagination-link-current-active-bg; }
     }
   } else {
+    height: auto;
+    padding: $pagination-link-pad;
     background: $pagination-link-current-background;
     color: $pagination-link-current-font-color;
     font-weight: $pagination-link-current-font-weight;

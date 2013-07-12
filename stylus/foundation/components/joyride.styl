@@ -6,7 +6,7 @@ $include-html-joyride-classes ?= $include-html-classes;
 // Controlling default Joyride styles
 $joyride-tip-bg ?= rgb(0,0,0);
 $joyride-tip-default-width ?= 300px;
-$joyride-tip-padding ?= emCalc(18px) emCalc(20px) emCalc(24px);
+$joyride-tip-padding ?= emCalc(18, 20, 24);
 $joyride-tip-border ?= solid 1px #555;
 $joyride-tip-radius ?= 4px;
 $joyride-tip-position-offset ?= 22px;
@@ -113,7 +113,7 @@ if $include-html-joyride-classes != false {
     color: $joyride-tip-font-color;
   }
   .joyride-tip-guide p {
-    margin: 0 0 emCalc(18px) 0;
+    margin: emCalc(0, 0, 18, 0)
     font-size: $joyride-tip-font-size;
     line-height: 1.3;
   }

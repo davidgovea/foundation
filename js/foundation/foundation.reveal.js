@@ -136,17 +136,28 @@
 
         if (typeof ajax_settings === 'undefined' || !ajax_settings.url) {
           // Apply stacked attribute to open stackable modals
-          toStack.each(function(index, el) {
-            var $el = $(el);
           var stack_modals = open_modal.filter('[data-reveal-stack]'),
             new_stacks = stack_modals.not('[data-reveal-stacked]'),
             z_list, z_max;
+
+          z_list = new_stacks.map(function() {
+            var $el = $(this);
+            // Register close handler on the opening modal.
+            // $el will remain [data-reveal-stacked]'ed until then.
             modal.one('closed', function(){
               $el.removeAttr('data-reveal-stacked');
             });
             
             $el.attr('data-reveal-stacked', true);
+            return $el.css('z-index');
           });
+
+          z_max = Math.max.apply(Math, z_list);
+
+          if (isFinite(z_max++)) {
+            modal.css('z-index', z_max);
+          }
+
           this.hide(open_modal.not('[data-reveal-stacked]'), this.settings.css.close);
           this.show(modal, this.settings.css.open);
         } else {

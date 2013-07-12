@@ -86,7 +86,7 @@
             }
 
             self.locked = true;
-            self.close.call(self, $(this).closest('.reveal-modal'));
+            self.close.call(self, $(this).find('.reveal-modal.open').not('[data-reveal-stacked]'));
           }
         })
         .on('open.fndtn.reveal', '.reveal-modal', this.settings.open)
@@ -97,7 +97,7 @@
         .on('closed.fndtn.reveal', '.reveal-modal', this.close_video);
 
       $( 'body' ).bind( 'keyup.reveal', function ( event ) {
-        var open_modal = $('.reveal-modal.open'),
+        var open_modal = $('.reveal-modal.open').not('[data-reveal-stacked]'),
             settings = $.extend({}, self.settings, self.data_options(open_modal));
         if ( event.which === 27  && settings.closeOnEsc) { // 27 is the keycode for the Escape key
           open_modal.foundation('reveal', 'close');
@@ -145,7 +145,9 @@
             // Register close handler on the opening modal.
             // $el will remain [data-reveal-stacked]'ed until then.
             modal.one('closed', function(){
-              $el.removeAttr('data-reveal-stacked');
+              setTimeout(function(){
+                $el.removeAttr('data-reveal-stacked');
+              }, 0);
             });
             
             $el.attr('data-reveal-stacked', true);
@@ -173,7 +175,7 @@
               modal.html(data);
               $(modal).foundation('section', 'reflow');
 
-              self.hide(open_modal, self.settings.css.close);
+              self.hide(open_modal.not('[data-reveal-stacked]'), self.settings.css.close);
               self.show(modal, self.settings.css.open);
             }
           });
@@ -186,14 +188,14 @@
     close : function (modal) {
 
       var modal = modal && modal.length ? modal : $(this.scope),
-          open_modals = $('.reveal-modal.open');
+          open_modals = $('.reveal-modal.open').not('[data-reveal-stacked]');
 
       if (open_modals.length > 0) {
         this.locked = true;
         modal.trigger('close');
         this.toggle_bg(modal);
         // Hide any non-stacked open modals
-        this.hide(open_modals.not('[data-reveal-stacked]'), this.settings.css.close);
+        this.hide(open_modals, this.settings.css.close);
       }
     },
 
@@ -208,9 +210,12 @@
     },
 
     toggle_bg : function (modal) {
-      if ($('.reveal-modal-bg').length === 0) {
+      var bg = $('.reveal-modal-bg');
+      if (bg.length === 0) {
         this.settings.bg = $('<div />', {'class': this.settings.bgClass})
           .appendTo('body');
+      } else {
+        this.settings.bg = bg;
       }
 
       if (this.settings.bg.filter(':visible').length > 0) {

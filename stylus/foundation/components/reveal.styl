@@ -12,13 +12,13 @@ $reveal-overlay-bg-old ?= #000;
 $reveal-modal-bg ?= #fff;
 $reveal-position-top ?= 50px;
 $reveal-default-width ?= 80%;
-$reveal-modal-padding ?= emCalc(20px);
+$reveal-modal-padding ?= emCalc(20);
 $reveal-box-shadow ?= 0 0 10px rgba(#000,.4);
 
 // We use these to style the reveal close button
-$reveal-close-font-size ?= emCalc(22px);
-$reveal-close-top ?= emCalc(8px);
-$reveal-close-side ?= emCalc(11px);
+$reveal-close-font-size ?= emCalc(22);
+$reveal-close-top ?= emCalc(8);
+$reveal-close-side ?= emCalc(11);
 $reveal-close-color ?= #aaa;
 $reveal-close-weight ?= bold;
 
@@ -123,7 +123,7 @@ if $include-html-reveal-classes != false {
   @media $small {
 
     .{$reveal-modal-class} {
-      reveal-modal-style(false, emCalc(30px), false, $box-shadow: false, $top-offset: emCalc(100px));
+      reveal-modal-style(false, emCalc(30), false, $box-shadow: false, $top-offset: emCalc(100));
 
       &.tiny  {
       	reveal-modal-base(false, 30%); 

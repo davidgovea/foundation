@@ -4,17 +4,17 @@
 $include-html-form-classes ?= $include-html-classes;
 
 // We use this to set the base for lots of form spacing and positioning styles
-$form-spacing ?= emCalc(16px);
+$form-spacing ?= emCalc(16);
 
 // We use these to style the labels in different ways
 $form-label-pointer ?= pointer;
-$form-label-font-size ?= emCalc(14px);
+$form-label-font-size ?= emCalc(14);
 $form-label-font-weight ?= 500;
 $form-label-font-color ?= lighten(#000, 30%);
-$form-label-bottom-margin ?= emCalc(3px);
+$form-label-bottom-margin ?= emCalc(3);
 $input-font-family ?= inherit;
 $input-font-color ?= rgba(0,0,0,0.75);
-$input-font-size ?= emCalc(14px);
+$input-font-size ?= emCalc(14);
 $input-bg-color ?= #fff;
 $input-focus-bg-color ?= darken(#fff, 2%);
 $input-border-color ?= darken(#fff, 20%);
@@ -22,14 +22,14 @@ $input-focus-border-color ?= darken(#fff, 40%);
 $input-border-style ?= solid;
 $input-border-width ?= 1px;
 $input-disabled-bg ?= #ddd;
-$input-box-shadow ?= inset 0 1px 2px rgba(0,0,0,0.1);
+$input-box-shadow ?=  inset 0 1px 2px rgba(0,0,0,0.1);
 $input-include-glowing-effect ?= true;
 
 // We use these to style the fieldset border and spacing.
 $fieldset-border-style ?= solid;
 $fieldset-border-width ?= 1px;
 $fieldset-border-color ?= #ddd;
-$fieldset-padding ?= emCalc(20px);
+$fieldset-padding ?= emCalc(20);
 $fieldset-margin ?= emCalc(18, 0);
 
 // We use these to style the legends when you use them
@@ -48,8 +48,8 @@ $input-prefix-font-color-alt ?= #fff;
 
 // We use these to style the error states for inputs and labels
 $input-error-message-padding ?= emCalc(6, 4);
-$input-error-message-top ?= -($form-spacing) - emCalc(5px);
-$input-error-message-font-size ?= emCalc(12px);
+$input-error-message-top ?= -($form-spacing) - emCalc(5);
+$input-error-message-font-size ?= emCalc(12);
 $input-error-message-font-weight ?= bold;
 $input-error-message-font-color ?= #fff;
 $input-error-message-font-color-alt ?= #333;
@@ -100,7 +100,7 @@ form-element() {
   font-size: $input-font-size;
   margin: 0 0 $form-spacing 0;
   padding: ($form-spacing / 2);
-  height: emCalc(13px) + ($form-spacing * 1.5);
+  height: emCalc(13) + ($form-spacing * 1.5);
   width: 100%;
   box-sizing(border-box);
   if $input-include-glowing-effect {
@@ -153,8 +153,8 @@ prefix-postfix-base() {
   border-width: $input-prefix-border-size;
   overflow: $input-prefix-overflow;
   font-size: $form-label-font-size;
-  height: ($form-label-font-size + ($form-spacing * 1.5) - emCalc(1px));
-  line-height: ($form-label-font-size + ($form-spacing * 1.5) - emCalc(1px));
+  height: ($form-label-font-size + ($form-spacing * 1.5) - emCalc(1));
+  line-height: ($form-label-font-size + ($form-spacing * 1.5) - emCalc(1));
 }
 
 // We use this mixin to create prefix label styles
@@ -180,7 +180,7 @@ prefix($bg=$input-prefix-bg,$is-button=false) {
     padding-top: 0;
     padding-bottom: 0;
     text-align: center;
-    line-height: emCalc(34px);
+    line-height: emCalc(34);
   }
 
 }
@@ -208,7 +208,7 @@ postfix($bg=$input-prefix-bg, $is-button=false) {
     padding-top: 0;
     padding-bottom: 0;
     text-align: center;
-    line-height: emCalc(34px);
+    line-height: emCalc(34);
   }
 
 }
@@ -225,7 +225,7 @@ fieldset() {
     background: $legend-bg;
     padding: $legend-padding;
     margin: 0;
-    margin-{$default-float}: emCalc(-3px);
+    margin-{$default-float}: emCalc(-3);
   }
 }
 

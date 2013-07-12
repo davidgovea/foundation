@@ -103,8 +103,8 @@ button-size($padding=$button-med, $full-width=false, $is-input=false) {
 
   // <input>'s and <button>'s take on strange padding. We added this to help fix that.
   if $is-input is $button-lrg {
-    padding-top: $is-input + emCalc(.5px);
-    padding-bottom: $is-input + emCalc(.5px);
+    padding-top: $is-input + emCalc(.5);
+    padding-bottom: $is-input + emCalc(.5);
     -webkit-appearance: none;
   } else if $is-input {
     padding-top: $is-input + emCalc(1);

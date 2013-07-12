@@ -14,7 +14,7 @@ $switch-height-tny ?= 22px;
 $switch-height-sml ?= 28px;
 $switch-height-med ?= 36px;
 $switch-height-lrg ?= 44px;
-$switch-bottom-margin ?= emCalc(20px);
+$switch-bottom-margin ?= emCalc(20);
 
 // We use these to control default font sizes for our classes.
 $switch-font-size-tny ?= 11px;
@@ -168,7 +168,7 @@ switch-size($height=$switch-height-med, $font-size=$switch-font-size-med, $line-
     // Move the paddle to the right position
     &:first-of-type:checked ~ span:last-child {
       {$default-float}: 100%;
-      margin-{$default-float}: emCalc(-($height) + 1px);
+      margin-{$default-float}: emCalc(-($height) + 1);
     }
   }
 

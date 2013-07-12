@@ -28,8 +28,8 @@ $custom-select-fade-to-color ?= #f3f3f3;
 $custom-select-border-color ?= #ddd;
 $custom-select-triangle-color ?= #aaa;
 $custom-select-triangle-color-open ?= #222;
-$custom-select-height ?= emCalc(13px) + ($form-spacing * 1.5);
-$custom-select-margin-bottom ?= emCalc(20px);
+$custom-select-height ?= emCalc(13) + ($form-spacing * 1.5);
+$custom-select-margin-bottom ?= emCalc(20);
 $custom-select-font-color-selected ?= #141414;
 $custom-select-disabled-color ?= #888;
 
@@ -40,15 +40,15 @@ $custom-dropdown-border-color ?= darken(#fff, 20%);
 $custom-dropdown-border-width ?= 1px;
 $custom-dropdown-border-style ?= solid;
 $custom-dropdown-font-color ?= #555;
-$custom-dropdown-font-size ?= emCalc(14px);
+$custom-dropdown-font-size ?= emCalc(14);
 $custom-dropdown-color-selected ?= #eeeeee;
 $custom-dropdown-font-color-selected ?= #000;
 $custom-dropdown-shadow ?= 0 2px 2px 0px rgba(0,0,0,0.1);
 $custom-dropdown-offset-top ?= auto;
-$custom-dropdown-list-padding ?= emCalc(4px);
-$custom-dropdown-default-float-padding ?= emCalc(6px);
-$custom-dropdown-opposite-padding ?= emCalc(38px);
-$custom-dropdown-list-item-min-height ?= emCalc(24px);
+$custom-dropdown-list-padding ?= emCalc(4);
+$custom-dropdown-default-float-padding ?= emCalc(6);
+$custom-dropdown-opposite-padding ?= emCalc(38);
+$custom-dropdown-list-item-min-height ?= emCalc(24);
 $custom-dropdown-width-small ?= 134px;
 $custom-dropdown-width-medium ?= 254px;
 $custom-dropdown-width-large ?= 434px;
@@ -176,7 +176,7 @@ if $include-html-button-classes != false {
       .current {
         cursor:default;
         white-space: nowrap;
-        line-height: $custom-select-height - emCalc(1px);
+        line-height: $custom-select-height - emCalc(1);
         color: $input-font-color;
         text-decoration: none;
         overflow: hidden;
@@ -198,7 +198,7 @@ if $include-html-button-classes != false {
           display: block;
           css-triangle(5px, $custom-select-triangle-color, top);
           position: absolute;
-          {$default-float}: ($form-spacing * 2.5 / 2) - emCalc(5px);
+          {$default-float}: ($form-spacing * 2.5 / 2) - emCalc(5);
           top: 50%;
           margin-top: -3px;
         }

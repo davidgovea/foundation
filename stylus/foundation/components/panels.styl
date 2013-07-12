@@ -13,8 +13,8 @@ $panel-function-factor ?= 10%;
 $panel-border-color ?= darken($panel-bg, $panel-function-factor);
 
 // We use these to set default inner padding and bottom margin
-$panel-margin-bottom ?= emCalc(20px);
-$panel-padding ?= emCalc(20px);
+$panel-margin-bottom ?= emCalc(20);
+$panel-padding ?= emCalc(20);
 
 // We use these to set default font colors
 $panel-font-color ?= #333;
@@ -56,7 +56,7 @@ panel($bg=$panel-bg, $padding=$panel-padding, $adjust=$panel-header-adjust) {
 
       // reset header line-heights for panels
       h1,h2,h3,h4,h5,h6 {
-        line-height: 1; margin-bottom: (emCalc(20px) / 2);
+        line-height: 1; margin-bottom: (emCalc(20) / 2);
         &.subheader { line-height: 1.4; }
       }
     }

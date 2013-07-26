@@ -60,6 +60,7 @@ Drupal
 * [Zoundation Theme](http://drupal.org/project/zoundation) by [Andrea Burton](https://twitter.com/andreaburton) & [Jeff Graham](https://twitter.com/jgraham909), FunnyMonkey
 
 Alfred
+
 * [Foundation Alfred](https://github.com/joshmedeski/foundation-alfred) by Josh Medeski (@joshmedeski)
 
 PyroCMS
@@ -72,11 +73,12 @@ Django
 
 MODX
 
-* [MODX Version](http://designfromwithin.com/blog/2012/02/07/foundation-modx/) by Menno Pietersen
+* [Flexibility Theme](http://flexibilitymodx.com/) by Menno Pietersen
 
 .NET
 
 * [NuGet Package for ASP.Net MVC](http://www.nuget.org/packages/Foundation3_MVC4) by Edward Charbeneau, @EdCharbeneau
+* [Kartris E-commerce](http://www.kartris.com/) by Cactusoft Ltd.
 
 Middleman
 
@@ -84,13 +86,17 @@ Middleman
 * [Middleman Foundation 4.x Template](https://github.com/mattolson/middleman-zurb-template) by [Matt Olson](http://mattolson.com)
 
 Magento
+
 * [Magento & Foundation](https://github.com/nandroid/MagentoFoundation) by Nandroid
 * [Waterlee Boilerplate](https://github.com/zeljkoprsa/waterlee-boilerplate) by Jake Sharp
 
-Metoer
+Meteor
+
 * [Meteor Package for Foundation](https://atmosphere.meteor.com/package/foundation) by Eric Wallace
+* [Foundation Smart Package](https://atmosphere.meteor.com/package/zurb-foundation)
 
 Python
+
 * [Pyramid Scaffold](https://github.com/ppinette/pyramid_foundation) by Parker Pinette
 
 CodeIgniter
@@ -101,7 +107,7 @@ Shopify
 
 * [Foundationify Shopify Theme](https://github.com/lukebussey/foundationify) by Luke Bussey
 
-Silverstripe
+SilverStripe
 
 * [Foundation Silverstripe Theme](https://github.com/ryanwachtl/silverstripe-foundation) by [Ryan Wachtl](https://github.com/ryanwachtl)
 
@@ -132,7 +138,7 @@ Grid Generator
 
 * [Experimental Grid Generator](http://www.gridlover.net/foundation/) courtesy of [Ville Vanninen](http://foolproof.me)
 
-Grid displayer
+Grid Displayer
 
 * [Grid displayer bookmarklet](http://alefeuvre.github.com/foundation-grid-displayer/) by [Antoine Lefeuvre](http://twitter.com/jiraisurfer)
 * [Responsive Design Bookmarklet](http://responsive.victorcoulon.fr/) by [Victor Coulon](https://twitter.com/_victa)
@@ -150,11 +156,6 @@ Yeoman Generator
 
 * [Yeoman 1.0-Foundation 4](https://github.com/lkbgift/foundation4-yeoman) by [Leonard Bogdonoff](http://twitter.com/lkbcc)
 * [Yeoman-Foundation](https://npmjs.org/package/yeoman-foundation) by Vincent Mac
-
-Meteor
-
-* [Foundation Smart Package](https://atmosphere.meteor.com/package/zurb-foundation)
-
 
 MIT Open Source License
 =======================

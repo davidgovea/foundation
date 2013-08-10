@@ -143,7 +143,7 @@
         tip.addClass('tip-override');
         objPos(nub, -nubHeight, 'auto', 'auto', target.offset().left);
       } else {
-        var left = target.offset().left - parseInt($('body').outerWidth())/2;
+        var left = target.offset().left - $('body').offset().left;
         nub.removeAttr('style');
         if (Foundation.rtl) {
           left = target.offset().left + target.offset().width - this.outerWidth(tip);

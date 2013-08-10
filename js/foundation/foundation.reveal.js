@@ -80,13 +80,14 @@
         .on('click.fndtn.reveal touchend', this.close_targets(), function (e) {
           e.preventDefault();
           if (!self.locked) {
-            var settings = $.extend({}, self.settings, self.data_options($('.reveal-modal.open')));
-            if ($(e.target)[0] === $('.' + settings.bgClass)[0] && !settings.closeOnBackgroundClick) {
+            var settings = $.extend({}, self.settings, self.data_options($('.reveal-modal.open'))),
+              bgClicked = $(e.target)[0] === $('.' + settings.bgClass)[0];
+            if (bgClicked && !settings.closeOnBackgroundClick) {
               return;
             }
 
             self.locked = true;
-            self.close.call(self, $(this).find('.reveal-modal.open').not('[data-reveal-stacked]'));
+            self.close.call(self, bgClicked ? $('.reveal-modal.open').not('[data-reveal-stacked]') : $(this).closest('.reveal-modal'));
           }
         })
         .on('open.fndtn.reveal', '.reveal-modal', this.settings.open)
@@ -210,12 +211,9 @@
     },
 
     toggle_bg : function (modal) {
-      var bg = $('.reveal-modal-bg');
-      if (bg.length === 0) {
+      if ($('.reveal-modal-bg').length === 0) {
         this.settings.bg = $('<div />', {'class': this.settings.bgClass})
           .appendTo('body');
-      } else {
-        this.settings.bg = bg;
       }
 
       if (this.settings.bg.filter(':visible').length > 0) {
